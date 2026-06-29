@@ -5,17 +5,22 @@ import { fetchServices } from '../../services/api';
 // ✂️ Step 1 — Selecionar Serviço
 // ============================================
 
-const serviceIcons = {
-  'Corte': '✂️',
-  'Barba': '🪒',
-  'Sobrancelha': '✨',
-  'Hidratação': '💧',
-  'Infantil': '👦',
-};
+// Ordem importa: regras mais específicas primeiro (combos), genéricas depois.
+// Cada regra testa o nome do serviço; a primeira que casar vence.
+const serviceIconPriority = [
+  { match: /Corte \+ Barba \+ Sobrancelha/i, icon: '💈' },
+  { match: /Barba \+ Sobrancelha/i,         icon: '🪒' },
+  { match: /Corte \+ Barba/i,               icon: '✂️' },
+  { match: /Corte/i,                         icon: '✂️' },
+  { match: /Barba/i,                         icon: '🪒' },
+  { match: /Sobrancelha/i,                   icon: '✨' },
+  { match: /Hidratação/i,                    icon: '💧' },
+  { match: /Infantil/i,                      icon: '👦' },
+];
 
 function getIcon(nome) {
-  for (const [key, icon] of Object.entries(serviceIcons)) {
-    if (nome.includes(key)) return icon;
+  for (const rule of serviceIconPriority) {
+    if (rule.match.test(nome)) return rule.icon;
   }
   return '💈';
 }

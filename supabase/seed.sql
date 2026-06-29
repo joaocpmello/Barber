@@ -32,7 +32,7 @@ INSERT INTO barbers (id, nome, foto_url, especialidade) VALUES
   );
 
 -- ============================================
--- 2. SERVIÇOS (4)
+-- 2. SERVIÇOS (8)
 -- ============================================
 INSERT INTO services (id, nome, preco, duracao_minutos) VALUES
   (
@@ -58,6 +58,30 @@ INSERT INTO services (id, nome, preco, duracao_minutos) VALUES
     'Sobrancelha',
     15.00,
     10
+  ),
+  (
+    'b1b2c3d4-0005-4000-8000-000000000005',
+    'Barba + Sobrancelha',
+    35.00,
+    30
+  ),
+  (
+    'b1b2c3d4-0006-4000-8000-000000000006',
+    'Corte + Barba + Sobrancelha',
+    65.00,
+    60
+  ),
+  (
+    'b1b2c3d4-0007-4000-8000-000000000007',
+    'Hidratação Capilar',
+    40.00,
+    30
+  ),
+  (
+    'b1b2c3d4-0008-4000-8000-000000000008',
+    'Corte Infantil',
+    30.00,
+    25
   );
 
 -- ============================================

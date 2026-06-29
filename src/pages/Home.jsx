@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchServices, fetchBarbers } from '../services/api';
 import { formatCurrency } from '../utils/formatters';
-import heroImg from '../assets/hero.png';
 
 // ============================================
 // 🏠 Home — Página inicial
@@ -69,13 +68,44 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative animate-fade-in">
+          <div className="relative animate-fade-in hidden md:block">
             <div className="absolute -inset-4 bg-primary-500/20 blur-3xl rounded-full" />
-            <img
-              src={heroImg}
-              alt="Barbeiro cortando cabelo"
-              className="relative w-full max-w-md mx-auto rounded-3xl shadow-2xl shadow-primary-500/10"
-            />
+
+            {/* Collage de serviços (sem foto) */}
+            <div className="relative w-full max-w-md mx-auto aspect-square">
+              {/* Trás, à esquerda: Corte */}
+              <div className="absolute top-4 left-0 w-44 h-44 rounded-3xl rotate-[-6deg]
+                              bg-gradient-to-br from-dark-700 to-dark-800
+                              border border-primary-500/30
+                              shadow-[0_0_40px_rgba(249,168,37,0.15)]
+                              flex flex-col items-center justify-center text-center
+                              p-4">
+                <span className="text-6xl mb-2">✂️</span>
+                <span className="text-sm font-heading font-semibold text-dark-50">Corte</span>
+              </div>
+
+              {/* Trás, à direita: Barba */}
+              <div className="absolute top-0 right-0 w-44 h-44 rounded-3xl rotate-[8deg]
+                              bg-gradient-to-br from-dark-700 to-dark-800
+                              border border-primary-500/30
+                              shadow-[0_0_40px_rgba(249,168,37,0.15)]
+                              flex flex-col items-center justify-center text-center
+                              p-4">
+                <span className="text-6xl mb-2">🪒</span>
+                <span className="text-sm font-heading font-semibold text-dark-50">Barba</span>
+              </div>
+
+              {/* Frente, centralizado embaixo: Sobrancelha */}
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-48 h-48 rounded-3xl rotate-[-3deg]
+                              bg-gradient-to-br from-primary-500 to-primary-600
+                              border border-primary-400
+                              shadow-[0_0_50px_rgba(249,168,37,0.4)]
+                              flex flex-col items-center justify-center text-center
+                              p-4">
+                <span className="text-6xl mb-2">✨</span>
+                <span className="text-sm font-heading font-semibold text-dark-900">Sobrancelha</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
