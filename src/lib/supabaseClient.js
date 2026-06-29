@@ -13,7 +13,7 @@ import { createClient } from '@supabase/supabase-js';
 // --- Fallbacks in-line (use para que o build funcione sem env var) ---------
 const FALLBACK_SUPABASE_URL = 'https://ifgcgtqlfutbpzwybrbs.supabase.co';
 const FALLBACK_SUPABASE_ANON_KEY =
-  'sb_publishable_SHSabD2r8a79RdSPdV-naA_ZqLGYK_d';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmZ2NndHFsZnV0YnB6d3licmJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MjM3MzcsImV4cCI6MjA5NTQ5OTczN30.V-sJJC4hTOJ_UHDwV4R3zvJwbNhRnH8bTJuGi5HYkjA';
 // ---------------------------------------------------------------------------
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || FALLBACK_SUPABASE_URL;
