@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import EnvConfigBanner from './components/EnvConfigBanner';
 import Home from './pages/Home';
 import BookingPage from './pages/BookingPage';
 import AdminPage from './pages/AdminPage';
@@ -18,6 +19,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-dark-900">
       <ScrollToTop />
+      <EnvConfigBanner />
       <Header />
       {/* pt-16 compensa o header fixo */}
       <main className="flex-1 pt-16">
