@@ -131,6 +131,54 @@ export async function updateAppointmentStatus(id, status) {
 }
 
 /**
+ * Busca agendamentos com filtros opcionais. Usado pelo painel admin
+ * quando não há data fixa selecionada (modo "Todos").
+ *
+ * @param {Object} opts
+ * @param {string} [opts.from] ISO date 'YYYY-MM-DD' (inclusive)
+ * @param {string} [opts.to]   ISO date 'YYYY-MM-DD' (inclusive)
+ * @param {string[]} [opts.barberIds] filtra por barbeiro
+ * @param {string[]} [opts.statuses] filtra por status
+ * @param {number} [opts.limit] limite de linhas (default 200)
+ */
+export async function fetchAppointments(opts = {}) {
+  return call('fetchAppointments', async () => {
+    const client = ensureSupabase();
+    const { from, to, barberIds, statuses, limit = 200 } = opts;
+
+    let q = client
+      .from('appointments')
+      .select(`
+        *,
+        barbers (id, nome, foto_url, especialidade),
+        services (id, nome, preco, duracao_minutos)
+      `)
+      .order('data_hora', { ascending: true })
+      .limit(limit);
+
+    if (from) {
+      // inclui o dia inteiro a partir de 00:00 local
+      const [y, m, d] = from.split('-').map(Number);
+      q = q.gte('data_hora', new Date(y, m - 1, d, 0, 0, 0, 0).toISOString());
+    }
+    if (to) {
+      const [y, m, d] = to.split('-').map(Number);
+      q = q.lte('data_hora', new Date(y, m - 1, d, 23, 59, 59, 999).toISOString());
+    }
+    if (barberIds && barberIds.length) {
+      q = q.in('barber_id', barberIds);
+    }
+    if (statuses && statuses.length) {
+      q = q.in('status', statuses);
+    }
+
+    const { data, error } = await q;
+    if (error) throw error;
+    return data;
+  });
+}
+
+/**
  * Cria um novo agendamento.
  * Aceita tanto payload com chaves camelCase (do wizard) quanto já em snake_case.
  */

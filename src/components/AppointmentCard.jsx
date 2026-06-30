@@ -10,6 +10,7 @@ export default function AppointmentCard({ appointment, onUpdateStatus }) {
     status,
     barbers,
     services,
+    observacoes,
   } = appointment;
 
   return (
@@ -59,6 +60,18 @@ export default function AppointmentCard({ appointment, onUpdateStatus }) {
             >
               📱 {cliente_whatsapp}
             </a>
+          )}
+
+          {/* Observações do cliente */}
+          {observacoes && observacoes.trim() && (
+            <div className="mt-2 border-l-2 border-primary-500/40 bg-primary-500/5 rounded-r-md px-3 py-2">
+              <p className="text-[10px] uppercase tracking-wider text-primary-400 font-semibold mb-0.5">
+                Observações
+              </p>
+              <p className="text-sm text-dark-200 italic whitespace-pre-wrap break-words">
+                “{observacoes.trim()}”
+              </p>
+            </div>
           )}
         </div>
 
