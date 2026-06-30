@@ -7,7 +7,13 @@ import { formatCurrency, formatDate } from '../utils/formatters';
 // 🛠️ AdminPage — painel administrativo
 // ============================================
 
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+// Fallback para que o build funcione sem env var configurada.
+// Troque para uma senha forte em produção — defina VITE_ADMIN_PASSWORD
+// no .env local ou nas Environment Variables da Vercel para sobrescrever.
+const FALLBACK_ADMIN_PASSWORD = 'Mineiro123';
+
+const ADMIN_PASSWORD =
+  import.meta.env.VITE_ADMIN_PASSWORD || FALLBACK_ADMIN_PASSWORD;
 const SESSION_KEY = 'mineiro_admin_authed';
 
 function todayStr() {
